@@ -6,23 +6,24 @@
     <title>Chengjie Liu's Personal Website</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+            font-family: 'Roboto', sans-serif; /* Change font to Arial */
+            line-height: 1.1; /* Increase line spacing */
             margin: 0;
             padding: 0;
             background-color: #ffffff;
-            color: #333;
+            color: #555;
         }
         header {
-            background: #24292e;
+            background: #555;
             color: #fff;
-            padding: 1rem 0;
+            padding: 0rem 0;
             text-align: center;
+            height: 0px; /* Set the height of the header */
+            margin-left: 300px; /* Add left margin to align with the content */
         }
         main {
-            padding: 2rem;
-            max-width: 800px;
-            margin: auto;
+            max-width: 100%; /* Make the website fill the entire screen width */
+            padding: 2rem; /* Maintain padding for content */
         }
         img {
             max-width: 100%;
@@ -31,27 +32,139 @@
             margin: 1rem auto;
         }
         h1, h2 {
-            color: #0366d6;
+            color: #070585;;
         }
         ul {
             list-style-type: none;
-            padding: 0;
-        }
-        li {
+            padding-left: 1.5;
+        }   
+        li {margin-left: 0; /* Remove default margin */
             margin: 0.5rem 0;
-        }
-        a {
-            color: #0366d6;
+        }i 
+        a { margin: 0.5rem 0;
+            color: #ff00cc; /* Change link text color to black */
             text-decoration: none;
-        }
+        }   
         a:hover {
             text-decoration: underline;
         }
         .icon {
-            width: 20px;
-            height: 20px;
+            width: 25px;
+            height: 25px;
             margin-right: 0.5rem;
             vertical-align: middle;
+            object-fit: cover;
+        }
+        .icon_school {
+            width: 25px;
+            height: 31px;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+            object-fit: cover;
+        }
+        .github-icon {
+            object-position: center;
+        }
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 0rem;
+            align-items: flex-start; /* Align links to the left */
+            margin-top: 1rem;
+            text-align: left;
+            padding-left: 2rem; /* Add some space to the left */
+        }
+        .link-item {
+            display: inline-block; /* 改为 block 以确保图片和文字左对齐 */
+            text-align: left; /* 确保内容左对齐 */
+            margin-bottom: 0rem;
+        }
+        .link-item img {
+            display: inline-block; /* 确保图片和文字在同一行 */
+            margin-right: 0.5rem; /* 保持图片与文字间距 */
+            vertical-align: middle; /* 图片与文字垂直对齐 */
+        }
+        .publication-item {
+            display: inline-block; /* 改为 block 以确保图片和文字左对齐 */
+            text-align: left; /* 确保内容左对齐 */
+            margin-bottom: -3rem;
+        }
+        .publication-item img {
+            display: inline-block; /* 确保图片和文字在同一行 */
+            margin-right: 0.5rem; /* 保持图片与文字间距 */
+            vertical-align: middle; /* 图片与文字垂直对齐 */
+        }
+        .publication-item a {
+            font-weight: bold; /* Make publication titles bold */
+            color: #333; /* Change publication link color */
+        }
+        .publication-item + .publication-item {
+            border-top: 1px solid #ccc; /* 添加分隔线 */
+            margin-top: 1rem; /* 分隔线与上方内容的间距 */
+            padding-top: 1rem; /* 分隔线与下方内容的间距 */
+        }
+        .bio {
+            text-align: left; /* Align bio text to the left */
+            /* margin: 1rem auto; */
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        .layout {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem; /* Adjust gap for better spacing */
+        }
+        .sidebar {
+            flex: 0 0 300px; 
+            text-align: center;
+            padding-right: 1rem; 
+            border-right: 2px dotted #ccc; /* Add dotted line to separate sidebar */
+            background-color: #f5f5f5; /* Set light grey background */
+            height: calc(100vh); /* 设置高度为视口高度减去标题的高度 */
+            position: fixed; /* 固定在页面左侧 */
+            top: 0px; /* 从标题下方开始 */
+            left: 0; /* 从左侧开始 */
+            overflow-y: auto; /* 如果内容超出，添加滚动条 */
+            padding-top: 5rem; /* Add space before the first content */
+        }
+        .content {
+            margin-left: 280px; /* 为内容留出侧边栏的空间 */
+            margin-top: 0px; /* 确保内容从标题下方开始 */
+        }
+        .selfie {
+            width: 250px; /* Adjust width as needed */
+            height: 250px; /* Adjust height as needed */
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            margin: 0.5rem auto;
+            border-radius: 80%; /* Make the photo circular */
+        }
+        .place {
+            text-align: left; /* Ensure place is left-aligned */
+        }
+        h1, h2, p, ul, li{
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.8;
+        }
+        p {
+            /*text-indent: 1.5em;  Add indentation to the beginning of paragraphs */
+            margin-bottom: 3em; /* Set paragraph spacing to 1.5 times */
+        }
+        h3, ul, li, div, p {
+            text-align: left; /* Ensure all content is left-aligned */
+        }
+        .authors {
+            font-size: 0.9rem;
+            font-weight: bold;
+            font-style: italic;
+            color: #333; /* Set authors text color to a lighter shade */
+        }
+        h2:not(:first-of-type) {
+            border-top: 1px solid #1c24515f; /* 添加分隔线 */
+            margin-top: 2rem; /* 分隔线与上方内容的间距 */
+            padding-top: 2rem; /* 分隔线与下方内容的间距 */
         }
     </style>
 </head>
@@ -59,31 +172,113 @@
     <header>
         <h1>Chengjie Liu's Personal Website</h1>
     </header>
-    <main>
-        <p>Hello! I'm Chengjie Liu, and this is my personal website.</p>
-        <p>Feel free to connect with me on the following platforms:</p>
-        <ul>
-            <li>
-                <a href="https://github.com/CjLiu-NJU" target="_blank">
-                    <img class="icon" src="Github.png" alt="GitHub Icon">
-                    GitHub
-                </a>
-            </li>
-            <li>
-                <a href="https://scholar.google.com/citations?user=EnMPTRsAAAAJ&hl=zh-CN" target="_blank">
-                    <img class="icon" src="GS.png" alt="Google Scholar Icon">
-                    Google Scholar
-                </a>
-            </li>
-        </ul>
-        <h2>My Photo</h2>
-        <img src="path/to/your/photo.jpg" alt="Chengjie Liu's Photo">
-        <h2>My Publications</h2>
-        <ul>
-            <li><a href="link-to-paper-1" target="_blank">Paper Title 1</a></li>
-            <li><a href="link-to-paper-2" target="_blank">Paper Title 2</a></li>
-            <li><a href="link-to-paper-3" target="_blank">Paper Title 3</a></li>
-        </ul>
+    <main class="layout">
+        <div class="sidebar">
+            <img class="selfie" src="selfie.JPG" alt="Chengjie Liu's Photo">
+            <!-- <p class="bio"> -->
+                <strong style="font-size: 2rem;">Chengjie Liu</strong><br>
+                <div class="links" style="text-align: left;">
+                    <div class="link-item">
+                        <img class="icon_school" src="nju.png" alt="GitHub Icon">
+                        <a href="https://iscl.nju.edu.cn/8a/5d/c58186a756317/page.htm" target="_blank"><strong>Ph.D.  @ NJU ISCL</strong></a>
+                    </div>
+                    <div class="link-item">
+                        <img class="icon" src="NCTIEDA.png" alt="Google Scholar Icon">
+                        <a href="https://nctieda.com" target="_blank"><strong>Intern @ NCTIEDA-iAnalog</strong></a>
+                    </div>
+                    <div class="link-item">
+                        <img class="icon github-icon" src="Github.png" alt="GitHub Icon">
+                        <a href="https://github.com/CjLiu-NJU" target="_blank"><strong>GitHub</strong></a>
+                    </div>
+                    <div class="link-item">
+                        <img class="icon" src="GS.png" alt="Google Scholar Icon">
+                        <a href="https://scholar.google.com/citations?user=EnMPTRsAAAAJ&hl=zh-CN" target="_blank"><strong>Google Scholar</strong></a>
+                    </div>
+                    <div class="link-item">
+                        <img class="icon" src="email.png" alt="Email Icon">
+                        <a href="mailto:cjliu_phd@smail.nju.edu.cn"><strong>Email</strong></a>
+                    </div>
+                </div>
+        </div>
+        <div class="content">
+            <h2>Biography</h2>
+            <p class="bio">
+                    Hi, I'm <strong>Chengjie Liu</strong>. I'm currently pursuing a Ph.D. at the
+                    <a href="https://iscl.nju.edu.cn" target="_blank"><strong>Intelligence Sensing and Communication Lab (ISCL)</strong></a>,
+                    <a href="https://www.nju.edu.cn" target="_blank"><strong>Nanjing University (NJU)</strong></a>, 
+                    advised by
+                    <a href="https://ese.nju.edu.cn/dl/list.htm" target="_blank"><strong>Prof. Li Du</strong></a> and
+                    <a href="https://ese.nju.edu.cn/dy/list.htm" target="_blank"><strong>Prof. Yuan Du</strong></a>.
+                    I'm also doing an internship at 
+                    <a href="https://www.nctieda.com" target="_blank"><strong>National Center of Technology Innovation for EDA (NCTIEDA)</strong></a>
+                    advised by
+                    <a href="https://ic.seu.edu.cn/yangjun/main.psp" target="_blank"><strong>Prof. Jun Yang</strong></a>.
+                    <br>
+                    <br>
+                    My research mainly focuses on knowledge - driven agile design of analog ICs. 
+                    
+                    If you're interested in this field or want to engage in some interesting scientific research exploration together, 
+                    please feel free to contact me by my <a href="mailto:cjliu_phd@smail.nju.edu.cn"><strong>Email</strong></a>:)
+                </p>
+            
+            <h2>My Publications</h2>
+                <h3>Preprints</h3>
+                <ul>
+                    <li><div class="publication-item">
+                            <a href="https://www.techrxiv.org/doi/full/10.36227/techrxiv.170473941.10097233" target="_blank">LADAC: Large Language Model-driven Auto-Designer for Analog Circuits</a>
+                            <p class="authors">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authors: <mark>Chengjie Liu</mark>, Yijiang Liu, Yuan Du, and Li Du</p>
+                    </div>
+                    </li>
+                    <li>
+                    <div class="publication-item">
+                            <a href="https://arxiv.org/pdf/2409.14739" target="_blank">AmpAgent: An LLM-based Multi-Agent System for Multi-stage Amplifier Schematic Design from Literature for Process and Performance Porting</a>
+                            <p class="authors">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authors: <mark>Chengjie Liu</mark>, Weiyu Chen, Anlan Peng, Yuan Du, Li Du,and Jun Yang</p>
+                    </div>
+                    </li>
+                </ul>
+                <!-- <a href="link-to-paper-2" target="_blank">Paper Title 2</a></li> -->
+                <h3>Journals</h3>
+                <ul>
+                    <div class="publication-item">
+                            <a href="https://www.mdpi.com/1424-8220/22/11/4126" target="_blank">[Sensors] A Contactless Glucose Solution Concentration Measurement System Based on Improved High Accurate FMCW Radar Algorithm</a>
+                            <p class="authors">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authors: <mark>Chengjie Liu</mark>, Yuan Du, and Li Du</p>
+                    </div>
+                </ul>
+                <h3>Conferences</h3>
+                <ul>
+                    <div class="publication-item">
+                            <a href="https://www.eda2.com/iseda/index.html" target="_blank">[ISEDA2025] A Large Language Model-based Multi-Agent Framework for Analog Circuits' Sizing Relationships Extraction</a>
+                            <p class="authors">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authors: <mark>Chengjie Liu</mark>, Weiyu Chen, Huiyao Xu, Yuan Du, Jun Yang, and Li Du</p>
+                    </div>
+                </ul>
+            <h2>Selected Awards</h2>
+                <ul style="list-style-type: disc; padding-left: 2rem;">
+                    <li><strong>Special Prize of Dongliang Scholarship</strong> - Nanjing University, 2022</li>
+                    <li><strong>The 2023 Personages of Nanjing University</strong> - Nanjing University, 2023</li>
+                </ul>
+            <h2>Teaching</h2>
+                <ul style="list-style-type: disc; padding-left: 2rem;">
+                    <li><strong>The Application and Practice of Large Language Models in the Field of Chip Design</strong> - Teaching Assistant, Fall Semester, NJU</li>
+                </ul>
+        </div>
     </main>
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const publicationLists = document.querySelectorAll("ul");
+
+            publicationLists.forEach((publicationList) => {
+                const items = Array.from(publicationList.querySelectorAll(".publication-item"));
+
+                items.forEach((item, index) => {
+                    const numberSpan = document.createElement("span");
+                    numberSpan.textContent = `${String(index + 1).padStart(2, '0')}. `;
+                    numberSpan.style.fontWeight = "bold";
+                    numberSpan.style.display = "inline"; // 确保序号为内联显示
+                    item.insertBefore(numberSpan, item.firstChild); // 插入序号到内容前
+                });
+            });
+        });
+    </script>
 </body>
 </html>
