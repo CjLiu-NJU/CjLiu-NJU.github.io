@@ -97,6 +97,10 @@
         .publication-item a {
             font-weight: bold; /* Make publication titles bold */
             color: #333; /* Change publication link color */
+            display: inline-block; /* 确保链接为块级元素 */
+            text-indent: 0em; /* 设置首行缩进为负值 */
+            padding-left: 0em; /* 为所有行添加左侧间距 */
+            line-height: 1.8; /* 调整行高 */
         }
         .publication-item + .publication-item {
             border-top: 1px solid #ccc; /* 添加分隔线 */
@@ -158,8 +162,12 @@
         .authors {
             font-size: 0.9rem;
             font-weight: bold;
+            margin-left: 0; /* 确保整体左对齐 */
             font-style: italic;
             color: #575757; /* Set authors text color to a lighter shade */
+            max-width: 1200px; /* 设置最大宽度为 600px，可根据需要调整 */
+            word-wrap: break-word; /* 如果单词太长，强制换行 */
+            overflow-wrap: break-word; /* 兼容性更好的换行方式 */
         }
         h2:not(:first-of-type) {
             border-top: 3px dotted #1c24515f; /* 添加分隔线 */
@@ -222,12 +230,12 @@
                 </p>
             <h2>News</h2>
                 <ul style="list-style-type: disc; padding-left: 2rem;">
-                    <li><strong>Our work <a href="https://www.techrxiv.org/doi/full/10.36227/techrxiv.170473941.10097233" target="_blank">LADAC</a> , is regarded by multiple studies
+                    <li><strong>🎉  Our work <a href="https://www.techrxiv.org/doi/full/10.36227/techrxiv.170473941.10097233" target="_blank">LADAC</a> , is regarded by multiple studies
                         (<a href="https://dl.acm.org/doi/pdf/10.1145/3676536.3676816" target="_blank">ADO-LLM</a>,
                         <a href="https://arxiv.org/pdf/2504.03711" target="_blank">A Survey of Circuit Foundation Model</a>)
                         <mark>as the first to use LLM Agents for analog circuit design</mark>. </strong></li>
                     <li>
-                        <strong>My work DiffCkt has been accepted by <a href="https://2025.iccad.com" target="_blank">ICCAD2025</a> ! My first paper in top4 EDA conference!
+                        <strong>🎉  My work DiffCkt has been accepted by <a href="https://2025.iccad.com" target="_blank">ICCAD2025</a> ! My first paper in top4 EDA conference!
                         </strong>
                     </li>
                 </ul>
@@ -280,6 +288,12 @@
                             <p class="authors">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authors: <mark>Chengjie Liu</mark>, Jiajia Li, Yabing Feng, Wenhao Huang, Weiyu Chen, Yuan Du, Li Du, and Jun Yang</p>
                     </div>
                     </li>
+                    <li>
+                    <div class="publication-item">
+                            <a href="https://2025.iccad.com" target="_blank">[ICCAD2025]  MMCircuitEval: A Comprehensive Multimodal Circuit-Focused Benchmark for Evaluating LLMs (Paper Coming Soon...)</a>
+                            <p class="authors">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authors: Chenchen Zhao, Zhengyuan Shi, Xiangyu Wen, <mark>Chengjie Liu</mark>, Yi Liu, Yunhao Zhou, Yuxiang Zhao, Hefei Feng, Yinan Zhu, Waa Gwok-Wan, Xin Cheng, Weiyu Chen, Yongqi Fu, Chujie Chen, Chenhao Xue, Ying Wang, Yibo Lin, Jun Yang, Ning Xu, Xi Wang and Qiang Xu</p>
+                    </div>
+                    </li>
                 </ul>
             <h2>Selected Awards</h2>
                 <ul style="list-style-type: disc; padding-left: 2rem;">
@@ -310,6 +324,30 @@
                 });
             });
         });
+
+        document.addEventListener("DOMContentLoaded", () => {
+    const authorParagraphs = document.querySelectorAll(".authors");
+
+    authorParagraphs.forEach((paragraph) => {
+            const words = paragraph.innerHTML.split(" ");
+            let formattedText = "";
+            let lineLength = 0;
+
+            words.forEach((word) => {
+                // 假设每个字符宽度为 8px，计算当前行的长度
+                lineLength += word.length * 8;
+
+                if (lineLength > 1200) { // 超过最大宽度时换行
+                    formattedText += "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + word + " ";
+                    lineLength = word.length * 8; // 重置行长度
+                } else {
+                    formattedText += word + " ";
+                }
+            });
+
+            paragraph.innerHTML = formattedText.trim(); // 更新段落内容
+        });
+    });
     </script>
 </body>
 </html>
