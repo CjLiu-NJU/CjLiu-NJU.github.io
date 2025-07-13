@@ -32,7 +32,7 @@
             margin: 1rem auto;
         }
         h1, h2 {
-            color: #070585;;
+            color: #057085;;
         }
         ul {
             list-style-type: none;
@@ -42,11 +42,27 @@
             margin: 0.5rem 0;
         }i 
         a { margin: 0.5rem 0;
-            color: #ff00cc; /* Change link text color to black */
+            color: #429d29; /* Change link text color to black */
             text-decoration: none;
         }   
         a:hover {
+            color: #b30000; /* 鼠标悬停时的颜色 */
             text-decoration: underline;
+        }
+        ul li a {
+            color: #404040; /* 强制设置颜色 */
+        }
+        ul li a:hover {
+            color: #057085; /* 强制设置颜色 */
+        }
+        div a {
+            color: #404040; /* 设置超链接颜色为绿色 */
+            text-decoration: none; /* 去掉下划线 */
+        }
+
+        div a:hover {
+            color: #057085; /* 鼠标悬停时的颜色 */
+            text-decoration: underline; /* 鼠标悬停时显示下划线 */
         }
         .icon {
             width: 25px;
@@ -96,11 +112,16 @@
         }
         .publication-item a {
             font-weight: bold; /* Make publication titles bold */
-            color: #333; /* Change publication link color */
+            color: #404040; /* Change publication link color */
             display: inline-block; /* 确保链接为块级元素 */
             text-indent: 0em; /* 设置首行缩进为负值 */
             padding-left: 0em; /* 为所有行添加左侧间距 */
             line-height: 1.8; /* 调整行高 */
+            text-decoration: none; /* 去掉下划线 */
+        }
+        .publication-item a:hover {
+            color: #057085; /* 鼠标悬停时的颜色 */
+            text-decoration: underline; /* 鼠标悬停时显示下划线 */
         }
         .publication-item + .publication-item {
             border-top: 1px solid #ccc; /* 添加分隔线 */
