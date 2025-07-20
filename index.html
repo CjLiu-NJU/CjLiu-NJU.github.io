@@ -429,13 +429,35 @@
                     const latitude = parseFloat(loc[0]);
                     const longitude = parseFloat(loc[1]);
 
-                    // 更新地图视图到访客位置
-                    map.setView([latitude, longitude], 10);
+                    // 创建访客数据对象
+                    const visitorData = {
+                        ip: data.ip,
+                        city: data.city,
+                        region: data.region,
+                        country: data.country,
+                        latitude: latitude,
+                        longitude: longitude,
+                        timestamp: new Date().toISOString()
+                    };
 
-                    // 添加标记
-                    L.marker([latitude, longitude]).addTo(map)
-                        .bindPopup(`You are here: ${data.city}, ${data.region}, ${data.country}`)
-                        .openPopup();
+                    // 从 localStorage 获取现有访客数据
+                    let visitors = JSON.parse(localStorage.getItem("visitors")) || [];
+
+                    // 检查是否已经记录过该 IP 地址
+                    const isExistingVisitor = visitors.some(visitor => visitor.ip === visitorData.ip);
+                    if (!isExistingVisitor) {
+                        visitors.push(visitorData); // 添加新访客数据
+                        localStorage.setItem("visitors", JSON.stringify(visitors)); // 保存到 localStorage
+                    }
+
+                    // 在地图上标注所有访客
+                    visitors.forEach(visitor => {
+                        L.marker([visitor.latitude, visitor.longitude]).addTo(map)
+                            .bindPopup(`IP: ${visitor.ip}<br>Location: ${visitor.city}, ${visitor.region}, ${visitor.country}<br>Time: ${visitor.timestamp}`);
+                    });
+
+                    // 更新地图视图到当前访客位置
+                    map.setView([latitude, longitude], 10);
                 })
                 .catch(error => {
                     console.error("Error fetching location data:", error);
