@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chengjie Liu's Personal Website</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    
     <style>
         body {
             font-family: 'Roboto', sans-serif; /* Change font to Arial */
@@ -64,6 +68,16 @@
             color: #057085; /* 鼠标悬停时的颜色 */
             text-decoration: underline; /* 鼠标悬停时显示下划线 */
         }
+
+        mark {
+            background-color: #057085c4; /* 设置背景颜色，例如黄色 */
+            color: #f5f5f5; /* 设置文本颜色，例如黑色 */
+            padding: 0.2em; /* 可选：增加内边距以改善视觉效果 */
+            border-radius: 3px; /* 可选：使标记的边角圆润 */
+            /* text-transform: uppercase; */
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* 阴影效果 */
+        }
+
         .icon {
             width: 25px;
             height: 25px;
@@ -123,10 +137,17 @@
             color: #057085; /* 鼠标悬停时的颜色 */
             text-decoration: underline; /* 鼠标悬停时显示下划线 */
         }
+        .publication-item {
+            transition: transform 0.333s ease;
+        }
+
+        .publication-item:hover {
+            transform: scale(1.03); /* 鼠标悬停时放大 */
+        }
         .publication-item + .publication-item {
-            border-top: 1px solid #ccc; /* 添加分隔线 */
-            margin-top: 1rem; /* 分隔线与上方内容的间距 */
-            padding-top: 1rem; /* 分隔线与下方内容的间距 */
+            border-top: 10px solid #ccc; /* 添加分隔线 */
+            margin-top: 2rem; /* 分隔线与上方内容的间距 */
+            padding-top: 2rem; /* 分隔线与下方内容的间距 */
         }
         .bio {
             text-align: left; /* Align bio text to the left */
@@ -195,6 +216,26 @@
             margin-top: 2rem; /* 分隔线与上方内容的间距 */
             padding-top: 2rem; /* 分隔线与下方内容的间距 */
         }
+        #map-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px; /* 限制地图宽度 */
+            margin: 2rem auto;
+        }
+
+        #world-map {
+            width: 100%;
+            height: auto;
+        }
+
+        .marker {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
     </style>
 </head>
 <body>
@@ -228,6 +269,7 @@
                         <a href="mailto:cjliu_phd@smail.nju.edu.cn"><strong>Email</strong></a>
                     </div>
                 </div>
+            <img id="world-map" src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_blank_without_borders.svg" alt="World Map">
         </div>
         <div class="content">
             <h2>Biography</h2>
@@ -369,6 +411,57 @@
             paragraph.innerHTML = formattedText.trim(); // 更新段落内容
         });
     });
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const publicationItems = document.querySelectorAll(".publication-item");
+
+    publicationItems.forEach((item, index) => {
+            if (index !== publicationItems.length - 1) { // 不为最后一个添加分割线
+                const hr = document.createElement("hr");
+                hr.style.border = "1px solid #ccc"; // 设置分割线样式
+                hr.style.margin = "1rem 0"; // 设置分割线的上下间距
+                hr.style.width = "70%"; // 设置分割线长度为 80%
+                hr.style.marginLeft = "left"; // 居中对齐
+                hr.style.marginRight = "left"; // 居中对齐
+                item.parentNode.insertBefore(hr, item.nextSibling); // 在当前项后插入分割线
+            }
+        });
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+            const mapContainer = document.getElementById("map-container");
+
+            // 获取访客地理位置
+            fetch("https://ipinfo.io/json?token=YOUR_TOKEN_HERE")
+                .then(response => response.json())
+                .then(data => {
+                    const loc = data.loc.split(","); // 获取经纬度
+                    const latitude = parseFloat(loc[0]);
+                    const longitude = parseFloat(loc[1]);
+
+                    // 将经纬度转换为地图上的像素位置
+                    const position = convertLatLngToPixel(latitude, longitude);
+
+                    // 创建标记
+                    const marker = document.createElement("div");
+                    marker.className = "marker";
+                    marker.style.left = `${position.x}%`;
+                    marker.style.top = `${position.y}%`;
+
+                    // 将标记添加到地图容器中
+                    mapContainer.appendChild(marker);
+                })
+                .catch(error => {
+                    console.error("Error fetching location data:", error);
+                });
+
+            // 经纬度转换为像素位置的函数
+            function convertLatLngToPixel(lat, lng) {
+                // 世界地图的简单比例转换
+                const x = (lng + 180) / 360 * 100; // 经度转换为百分比
+                const y = (90 - lat) / 180 * 100; // 纬度转换为百分比
+                return { x, y };
+            }
+        });
     </script>
 </body>
 </html>
