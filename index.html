@@ -253,7 +253,9 @@
                         <a href="mailto:cjliu_phd@smail.nju.edu.cn"><strong>Email</strong></a>
                     </div>
                 </div>
-            <!-- <div id="map"></div> -->
+                <strong style="font-size: 2rem; margin-top: 2rem; display: block;">🌍 Visitors</strong><br>
+                <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=v4ebT5lrBXHj8P6hEVUt-SGTiL0iZEobhRs2tRQ0fAA"></script>
+                <!-- <div id="map"></div> -->
         </div>
         <div class="content">
             <h2>👨🏼‍🎓  Biography</h2>
@@ -411,58 +413,9 @@
             }
         });
     });
-    document.addEventListener("DOMContentLoaded", () => {
-            // 初始化地图
-            const map = L.map('map').setView([0, 0], 2); // 默认视图
-
-            // 添加地图图层
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
-
-            // 获取访客地理位置
-            fetch("https://ipinfo.io/json?token=07dcbc90887c1f")
-                .then(response => response.json())
-                .then(data => {
-                    const loc = data.loc.split(","); // 获取经纬度
-                    const latitude = parseFloat(loc[0]);
-                    const longitude = parseFloat(loc[1]);
-
-                    // 创建访客数据对象
-                    const visitorData = {
-                        ip: data.ip,
-                        city: data.city,
-                        region: data.region,
-                        country: data.country,
-                        latitude: latitude,
-                        longitude: longitude,
-                        timestamp: new Date().toISOString()
-                    };
-
-                    // 从 localStorage 获取现有访客数据
-                    let visitors = JSON.parse(localStorage.getItem("visitors")) || [];
-
-                    // 检查是否已经记录过该 IP 地址
-                    const isExistingVisitor = visitors.some(visitor => visitor.ip === visitorData.ip);
-                    if (!isExistingVisitor) {
-                        visitors.push(visitorData); // 添加新访客数据
-                        localStorage.setItem("visitors", JSON.stringify(visitors)); // 保存到 localStorage
-                    }
-
-                    // 在地图上标注所有访客
-                    visitors.forEach(visitor => {
-                        L.marker([visitor.latitude, visitor.longitude]).addTo(map)
-                            .bindPopup(`IP: ${visitor.ip}<br>Location: ${visitor.city}, ${visitor.region}, ${visitor.country}<br>Time: ${visitor.timestamp}`);
-                    });
-
-                    // 更新地图视图到当前访客位置
-                    map.setView([latitude, longitude], 10);
-                })
-                .catch(error => {
-                    console.error("Error fetching location data:", error);
-                });
-        });
+    
     </script>
+
+    
 </body>
 </html>
