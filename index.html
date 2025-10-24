@@ -220,6 +220,55 @@
             height: 500px;
             width: 100%;
         }
+        /* 响应式适配 */
+        @media (max-width: 1024px) {
+        .layout { gap: 0.75rem; }
+        .selfie { width: 200px; height: 200px; }
+        }
+
+        @media (max-width: 768px) {
+        /* 改为单列布局 */
+        .layout { flex-direction: column; }
+
+        /* 侧栏不再固定，宽度占满，改为底部分隔线 */
+        .sidebar {
+            position: static;
+            flex: 0 0 auto;
+            width: 100%;
+            height: auto;
+            overflow: visible;
+            border-right: 0;
+            border-bottom: 2px dotted #ccc;
+            padding: 1rem;
+            padding-top: 1rem;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+
+        /* 内容区不再预留左侧空间 */
+        .content { margin-left: 0; }
+
+        /* 头部不再左移 */
+        header { margin-left: 0; }
+
+        /* 缩小头像与地图 */
+        .selfie { width: 140px; height: 140px; }
+        #map { height: 320px; }
+
+        /* 链接与出版物列表在窄屏更紧凑 */
+        .links { padding-left: 0; align-items: stretch; }
+        .publication-item { display: block; margin-bottom: 1rem; }
+        .publication-item a { line-height: 1.6; }
+
+        /* 作者行宽放开为容器宽度 */
+        .authors { max-width: 100%; font-size: 0.95rem; }
+        }
+
+        @media (max-width: 400px) {
+        body { font-size: 14px; }
+        .selfie { width: 120px; height: 120px; }
+        #map { height: 240px; }
+        }
     </style>
 </head>
 <body>
