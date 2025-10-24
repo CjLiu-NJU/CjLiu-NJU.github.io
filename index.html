@@ -229,18 +229,18 @@
         @media (max-width: 768px) {
         /* 改为单列布局 */
         .layout { flex-direction: column; }
-
+        header {
+            margin-left: 0;        /* 取消桌面端左移 */
+            height: auto;          /* 关键：让 header 有自然高度 */
+            padding: 0.75rem 0;    /* 给 h1 一点上下内边距 */
+        }
         /* 侧栏不再固定，宽度占满，改为底部分隔线 */
         .sidebar {
             position: static;
-            flex: 0 0 auto;
             width: 100%;
-            height: auto;
-            overflow: visible;
             border-right: 0;
             border-bottom: 2px dotted #ccc;
             padding: 1rem;
-            padding-top: 3rem;
             margin: 0;
             background-color: #f5f5f5;
         }
@@ -248,8 +248,6 @@
         /* 内容区不再预留左侧空间 */
         .content { margin-left: 0; }
 
-        /* 头部不再左移 */
-        header { margin-left: 0; }
 
         /* 缩小头像与地图 */
         .selfie { width: 140px; height: 140px; }
