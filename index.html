@@ -230,10 +230,13 @@
         /* 改为单列布局 */
         .layout { flex-direction: column; }
         header {
-            margin-left: 0;        /* 取消桌面端左移 */
-            height: auto;          /* 关键：让 header 有自然高度 */
-            padding: 0.75rem 0;    /* 给 h1 一点上下内边距 */
+            background: transparent !important;
+            color: inherit;
+            margin-left: 0 !important;
+            height: auto;
+            padding: 0.75rem 0;
         }
+        main { padding: 0rem; }
         /* 侧栏不再固定，宽度占满，改为底部分隔线 */
         .sidebar {
             position: static;      /* 关键：取消固定定位 */
