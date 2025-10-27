@@ -220,6 +220,7 @@
             height: 500px;
             width: 100%;
         }
+        .globe-wrap { display: block !important; }
         /* 响应式适配 */
         @media (max-width: 1024px) {
         .layout { gap: 0rem; }
@@ -270,6 +271,8 @@
         /* 作者行宽放开为容器宽度 */
         .authors { max-width: 100%; font-size: 0.95rem; }
         }
+        /* 隐藏地球 viewer */
+        .globe-wrap { display: none !important; }
 
         @media (max-width: 400px) {
         body { font-size: 14px; }
@@ -309,8 +312,10 @@
                         <a href="mailto:cjliu_phd@smail.nju.edu.cn"><strong>Email</strong></a>
                     </div>
                 </div>
-                <strong style="font-size: 2rem; margin-top: 2rem; display: block;">🌍 Visitors</strong><br>
-                <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=v4ebT5lrBXHj8P6hEVUt-SGTiL0iZEobhRs2tRQ0fAA"></script>
+                <div class="globe-wrap">
+                    <strong style="font-size: 2rem; margin-top: 2rem; display: block;">🌍 Visitors</strong><br>
+                    <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=v4ebT5lrBXHj8P6hEVUt-SGTiL0iZEobhRs2tRQ0fAA"></script>
+                </div>
                 <!-- <div id="map"></div> -->
         </div>
         <div class="content">
