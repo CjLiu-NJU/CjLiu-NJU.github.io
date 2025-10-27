@@ -237,8 +237,15 @@
             padding-right: var(--mobile-gutter) !important;
             box-sizing: border-box;
         }
+        /* 仅针对包含出版项的列表，去掉左侧缩进 */
+        ul:has(.publication-item) { padding-left: 0 !important; }
 
-        
+        /* 保险起见，移除 li 的左外边距 */
+        ul:has(.publication-item) > li { margin-left: 0 !important; }
+
+        /* 标题链接不缩进 */
+        .publication-item a { text-indent: 0 !important; padding-left: 0 !important; }
+                
             /* 改为单列布局 */
         .layout { flex-direction: column; }
         header {
@@ -365,19 +372,19 @@
                 <ul>
                     <li><div class="publication-item">
                             <a href="https://www.techrxiv.org/doi/full/10.36227/techrxiv.170473941.10097233" target="_blank">LADAC: Large Language Model-driven Auto-Designer for Analog Circuits</a>
-                            <p class="authors">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authors: <mark>Chengjie Liu</mark>, Yijiang Liu, Yuan Du, and Li Du*</p>
+                            <p class="authors">Authors: <mark>Chengjie Liu</mark>, Yijiang Liu, Yuan Du, and Li Du*</p>
                     </div>
                     </li>
                     <li>
                     <div class="publication-item">
                             <a href="https://arxiv.org/pdf/2409.14739" target="_blank">AmpAgent: An LLM-based Multi-Agent System for Multi-stage Amplifier Schematic Design from Literature for Process and Performance Porting</a>
-                            <p class="authors">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authors: <mark>Chengjie Liu</mark>, Weiyu Chen, Anlan Peng, Yuan Du, Yang Jun, and Li Du*</p>
+                            <p class="authors">Authors: <mark>Chengjie Liu</mark>, Weiyu Chen, Anlan Peng, Yuan Du, Yang Jun, and Li Du*</p>
                     </div>
                     </li>
                     <li>
                     <div class="publication-item">
                         <a href="https://www.techrxiv.org/doi/full/10.36227/techrxiv.170654432.24640735" target="_blank">RAM-NAF: A Reconfigurable Analog Module for Nonlinear Activation Function Computation in Processing-in-Memory</a>
-                        <p class="authors">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authors: Chengjie Xie, Zhuang Shao, Yajie Wu, <mark>Chengjie Liu</mark>, Mingzhe Zhang, Yuan Du, and Li Du*</p>
+                        <p class="authors">Authors: Chengjie Xie, Zhuang Shao, Yajie Wu, <mark>Chengjie Liu</mark>, Mingzhe Zhang, Yuan Du, and Li Du*</p>
                     </li>
                 </ul>
                 <!-- <a href="link-to-paper-2" target="_blank">Paper Title 2</a></li> -->
@@ -385,11 +392,11 @@
                 <ul>
                     <div class="publication-item">
                             <a href="https://www.mdpi.com/1424-8220/22/11/4126" target="_blank">[Sensors] A Contactless Glucose Solution Concentration Measurement System Based on Improved High Accurate FMCW Radar Algorithm</a>
-                            <p class="authors">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authors: <mark>Chengjie Liu</mark>, Yuan Du, and Li Du*</p>
+                            <p class="authors">Authors: <mark>Chengjie Liu</mark>, Yuan Du, and Li Du*</p>
                     </div>
                     <div class="publication-item">
                             <a href="https://www.sciengine.com/SCIS/doi/10.1007/s11432-025-4590-5" target="_blank">[Science China - Information Science] IC + AI: A no-human-in-loop design paradigm?</a>
-                            <p class="authors">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authors: <mark>Chengjie Liu</mark>, and Jun Yang*</p>
+                            <p class="authors">Authors: <mark>Chengjie Liu</mark>, and Jun Yang*</p>
                     </div>
                     
                 </ul>
@@ -398,31 +405,31 @@
                     <li>
                     <div class="publication-item">
                             <a href="https://arxiv.org/pdf/2506.18424" target="_blank">[ISEDA2025] A Large Language Model-based Multi-Agent Framework for Analog Circuits' Sizing Relationships Extraction</a>
-                            <p class="authors">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authors: <mark>Chengjie Liu</mark>, Weiyu Chen, Huiyao Xu, Yuan Du, Jun Yang, and Li Du*</p>
+                            <p class="authors">Authors: <mark>Chengjie Liu</mark>, Weiyu Chen, Huiyao Xu, Yuan Du, Jun Yang, and Li Du*</p>
                     </div>
                     </li>
                     <li>
                     <div class="publication-item">
                             <a href="https://arxiv.org/abs/2507.09965" target="_blank">[ISEDA2025] AnalogTester: A Large Language Model-Based Framework for Automatic Testbench Generation in Analog Circuit Design</a>
-                            <p class="authors">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authors: Weiyu Chen, <mark>Chengjie Liu</mark>, Wenhao Huang, Jinyang Lyu, Mingqian Yang, Yuan Du, Li Du*, and Jun Yang</p>
+                            <p class="authors">Authors: Weiyu Chen, <mark>Chengjie Liu</mark>, Wenhao Huang, Jinyang Lyu, Mingqian Yang, Yuan Du, Li Du*, and Jun Yang</p>
                     </div>
                     </li>
                     <li>
                     <div class="publication-item">
                             <a href="https://ieeexplore.ieee.org/document/11100581" target="_blank">[ISEDA2025] Image2Net: Datasets, Benchmark and Hybrid Framework to Convert Analog Circuit Diagrams into Netlists</a>
-                            <p class="authors">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authors: Haohang Xu, <mark>Chengjie Liu</mark>, Qihang Wang, Wenhao Huang, Yongjian Xu, Weiyu Chen, Anlan Peng, Zhijun Li, Bo Li, Lei Qi, Jun Yang, Yuan Du, and Li Du*</p>
+                            <p class="authors">Authors: Haohang Xu, <mark>Chengjie Liu</mark>, Qihang Wang, Wenhao Huang, Yongjian Xu, Weiyu Chen, Anlan Peng, Zhijun Li, Bo Li, Lei Qi, Jun Yang, Yuan Du, and Li Du*</p>
                     </div>
                     </li>
                     <li>
                     <div class="publication-item">
                             <a href="https://arxiv.org/abs/2507.00444" target="_blank">[ICCAD2025] DiffCkt: A Diffusion Model-Based Hybrid Neural Network Framework for Automatic Transistor-Level Generation of Analog Circuits </a>
-                            <p class="authors">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authors: <mark>Chengjie Liu</mark>, Jiajia Li, Yabing Feng, Wenhao Huang, Weiyu Chen, Yuan Du, Jun Yang, and Li Du*</p>
+                            <p class="authors">Authors: <mark>Chengjie Liu</mark>, Jiajia Li, Yabing Feng, Wenhao Huang, Weiyu Chen, Yuan Du, Jun Yang, and Li Du*</p>
                     </div>
                     </li>
                     <li>
                     <div class="publication-item">
                             <a href="https://arxiv.org/abs/2507.19525" target="_blank">[ICCAD2025]  MMCircuitEval: A Comprehensive Multimodal Circuit-Focused Benchmark for Evaluating LLMs</a>
-                            <p class="authors">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authors: Chenchen Zhao, Zhengyuan Shi, Xiangyu Wen, <mark>Chengjie Liu</mark>, Yi Liu, Yunhao Zhou, Yuxiang Zhao, Hefei Feng, Yinan Zhu, Waa Gwok-Wan, Xin Cheng, Weiyu Chen, Yongqi Fu, Chujie Chen, Chenhao Xue, Ying Wang, Yibo Lin, Jun Yang, Ning Xu, Xi Wang and Qiang Xu*</p>
+                            <p class="authors">Authors: Chenchen Zhao, Zhengyuan Shi, Xiangyu Wen, <mark>Chengjie Liu</mark>, Yi Liu, Yunhao Zhou, Yuxiang Zhao, Hefei Feng, Yinan Zhu, Waa Gwok-Wan, Xin Cheng, Weiyu Chen, Yongqi Fu, Chujie Chen, Chenhao Xue, Ying Wang, Yibo Lin, Jun Yang, Ning Xu, Xi Wang and Qiang Xu*</p>
                     </div>
                     </li>
                 </ul>
@@ -469,7 +476,7 @@
                 lineLength += word.length * 8;
 
                 if (lineLength > 1200) { // 超过最大宽度时换行
-                    formattedText += "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + word + " ";
+                    formattedText += "<br>" + word + " ";
                     lineLength = word.length * 8; // 重置行长度
                 } else {
                     formattedText += word + " ";
