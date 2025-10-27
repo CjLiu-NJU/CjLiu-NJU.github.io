@@ -228,7 +228,18 @@
         }
 
         @media (max-width: 768px) {
-        /* 改为单列布局 */
+        
+        :root { --mobile-gutter: 0.5rem; }
+
+        /* 所有主要容器在手机端左右各 1rem 内边距 */
+        body, main, header, .layout, .sidebar, .content {
+            padding-left: var(--mobile-gutter) !important;
+            padding-right: var(--mobile-gutter) !important;
+            box-sizing: border-box;
+        }
+
+        
+            /* 改为单列布局 */
         .layout { flex-direction: column; }
         header {
             background: transparent !important;
@@ -251,7 +262,7 @@
             border-bottom: 2px dotted #ccc;
             background-color: #f5f5f5;
             margin: 0;
-            padding: 1rem;         /* 适当减少顶部留白 */
+            padding: 0rem;         /* 适当减少顶部留白 */
             padding-top: 1rem;
         }
 
