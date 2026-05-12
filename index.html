@@ -297,6 +297,19 @@
         .selfie { width: 120px; height: 120px; }
         #map { height: 240px; }
         }
+        .citation-badge {
+            display: inline-block;
+            background-color: #057085;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        .citation-badge.loading {
+            background-color: #ccc;
+        }
     </style>
 </head>
 <body>
@@ -538,6 +551,154 @@
         });
     });
     
+
+    // Citation cache & fetching
+    const CACHE_KEY = "ss_citations";
+    const CACHE_TTL = 86400000; // 24 hours
+
+    function loadCache() {
+        try { return JSON.parse(localStorage.getItem(CACHE_KEY) || "{}"); } catch { return {}; }
+    }
+    function saveCache(cache) {
+        try { localStorage.setItem(CACHE_KEY, JSON.stringify(cache)); } catch {}
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const items = [...document.querySelectorAll(".publication-item")];
+        const cache = loadCache();
+        const fetches = [];
+
+        for (const item of items) {
+            const link = item.querySelector("a");
+            if (!link) continue;
+            const title = link.textContent.trim();
+            const url = link.href;
+
+            const badge = document.createElement("span");
+            badge.className = "citation-badge";
+            const authors = item.querySelector(".authors");
+            item.insertBefore(badge, authors);
+
+            const cached = cache[title];
+            if (cached && Date.now() - cached.at < CACHE_TTL) {
+                setBadge(badge, cached.n, cached.id);
+                continue; // skip re-fetch, cache is fresh
+            }
+
+            badge.textContent = "...";
+            badge.classList.add("loading");
+
+            fetches.push((async () => {
+                try {
+                    const result = await fetchCitation(url, title);
+                    if (result) {
+                        cache[title] = { n: result.count, id: result.paperId, at: Date.now() };
+                        saveCache(cache);
+                        setBadge(badge, result.count, result.paperId);
+                    } else {
+                        setBadge(badge, 0, null);
+                    }
+                } catch (e) {
+                    console.warn("Citation fetch failed:", title, e);
+                    setBadge(badge, 0, null);
+                }
+                badge.classList.remove("loading");
+            })());
+        }
+
+        // Run all fetches in parallel
+        Promise.allSettled(fetches);
+    });
+
+    function setBadge(badge, count, paperId) {
+        badge.classList.remove("loading");
+        if (paperId) {
+            badge.innerHTML = `<a href="https://www.semanticscholar.org/paper/${paperId}" target="_blank" style="color:white;text-decoration:none;">${count} citations ↗</a>`;
+        } else {
+            badge.textContent = count + " citations";
+        }
+    }
+
+    async function fetchCitation(url, title) {
+        let result = null;
+        if (url && !url.includes("eda2.com") && !url.includes("dac.com")) {
+            result = await fetchByUrl(url);
+        }
+        if (!result) {
+            result = await fetchByTitle(title);
+        }
+        return result;
+    }
+
+    function cleanPaperTitle(t) {
+        return t.replace(/^\[.*?\]\s*/, "").replace(/\s*\(Paper Coming Soon\).*$/, "").trim();
+    }
+
+    async function fetchByUrl(url) {
+        try {
+            let u = url.replace(/arxiv\.org\/pdf\//, "arxiv.org/abs/").replace(/\.pdf$/, "");
+            u = u.replace(/\/$/, "");
+            const r = await fetch("https://api.semanticscholar.org/graph/v1/paper/URL:" + encodeURIComponent(u) + "?fields=citationCount,title,paperId");
+            if (r.ok) {
+                const d = await r.json();
+                if (d && d.citationCount !== undefined && d.citationCount !== null) {
+                    return { count: d.citationCount, paperId: d.paperId || null };
+                }
+            }
+        } catch (e) { console.warn("URL lookup failed:", e); }
+        return null;
+    }
+
+    async function fetchByTitle(title) {
+        try {
+            const q = cleanPaperTitle(title);
+            if (!q) return null;
+            const r = await fetch("https://api.semanticscholar.org/graph/v1/paper/search/match?query=" + encodeURIComponent(q) + "&limit=3&fields=citationCount,title,paperId");
+            if (r.ok) {
+                const d = await r.json();
+                if (d.data && d.data.length > 0) {
+                    let best = d.data[0], bestScore = 0;
+                    for (const p of d.data) {
+                        const s = similarity(q.toLowerCase(), (p.title || "").toLowerCase());
+                        if (s > bestScore) { bestScore = s; best = p; }
+                    }
+                    if (best.citationCount !== undefined) {
+                        return { count: best.citationCount, paperId: best.paperId || null };
+                    }
+                }
+            }
+        } catch (e) { console.warn("Title search failed:", e); }
+        return null;
+    }
+
+    function similarity(s1, s2) {
+        const longer = s1.length >= s2.length ? s1 : s2;
+        const shorter = s1.length < s2.length ? s1 : s2;
+        if (longer.length === 0) return 1.0;
+        return (longer.length - editDistance(longer, shorter)) / longer.length;
+    }
+
+    function editDistance(s1, s2) {
+        s1 = s1.toLowerCase(); s2 = s2.toLowerCase();
+        const costs = new Array(s2.length + 1);
+        for (let i = 0; i <= s1.length; i++) {
+            let lastValue = i;
+            for (let j = 0; j <= s2.length; j++) {
+                if (i === 0) { costs[j] = j; }
+                else if (j > 0) {
+                    let newValue = costs[j - 1];
+                    if (s1.charAt(i - 1) !== s2.charAt(j - 1)) {
+                        newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
+                    }
+                    costs[j - 1] = lastValue;
+                    lastValue = newValue;
+                }
+            }
+            if (i > 0) costs[s2.length] = lastValue;
+        }
+        return costs[s2.length];
+    }
+
     </script>
 
     
